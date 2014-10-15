@@ -48,9 +48,9 @@ public class UserInterface extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblWelcomeToEllerbank = new JLabel("Welcome to EllerBank!");
-		lblWelcomeToEllerbank.setFont(new Font("Segoe UI", Font.PLAIN, 11));
+		lblWelcomeToEllerbank.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		lblWelcomeToEllerbank.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcomeToEllerbank.setBounds(132, 11, 179, 77);
+		lblWelcomeToEllerbank.setBounds(79, 11, 286, 77);
 		contentPane.add(lblWelcomeToEllerbank);
 		
 		JButton btnCreateAccount = new JButton("Create New Account");
