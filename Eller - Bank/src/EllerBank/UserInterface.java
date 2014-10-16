@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JPasswordField;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class UserInterface extends JFrame {
 
@@ -62,13 +64,16 @@ public class UserInterface extends JFrame {
 		contentPane.add(btnCreateAccount);
 		
 		JButton btnLoginToExisting = new JButton("Login to Existing Account");
+		btnLoginToExisting.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Test");
+
+			}
+		});
 		btnLoginToExisting.setBounds(281, 99, 153, 50);
 		contentPane.add(btnLoginToExisting);
-	}
-	
-	private void login (String name, String IP, int port){
-		dispose();
-		System.out.println(name + IP + port + "");
+		
+		
 	}
 	
 	public static void main(String[] args) {

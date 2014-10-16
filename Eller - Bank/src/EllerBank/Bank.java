@@ -1,4 +1,4 @@
-/** package EllerBank;
+package EllerBank;
 
 import java.util.Scanner;
 import java.sql.*;
@@ -15,8 +15,8 @@ public class Bank {
 		Account userAccnt = new Account(fname, lname);
 		System.out.println("Thanks " + fname + ", you now have an account! Here are your account details:");
 		System.out.println(userAccnt);
-		
+		BankDatabase banker = new BankDatabase();
+		banker.setUser(fname, lname, userAccnt.getAccntNum(), userAccnt.getBal());
 	}
 
 }
-**/

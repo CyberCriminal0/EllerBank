@@ -51,12 +51,16 @@ public class Account {
 		this.lastN = lastN;
 	}
 
-	private double getBal() {
+	protected double getBal() {
 		return bal;
 	}
 
 	private void setBal(double bal) {
 		this.bal = bal;
+	}
+
+	protected int getAccntNum() {
+		return accntNum;
 	}
 
 	public String toString(){
