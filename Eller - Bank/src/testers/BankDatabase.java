@@ -1,4 +1,6 @@
-package EllerBank;
+
+/**	
+package testers;
 
 import java.util.Scanner;
 import java.sql.*;
@@ -18,8 +20,9 @@ public class BankDatabase {
 	}
 	
 
-public Object setUser(String first, String last, int accnt, double bal){
-		
+	   public static void main(String[] args) {
+
+	
 	
 	
 		Connection conn = null;
@@ -40,25 +43,19 @@ public Object setUser(String first, String last, int accnt, double bal){
 		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		      System.out.println("Connection Success!");
 		      
-		      //STEP 4: Execute a query
-		      System.out.println("Adding user...");
-		      stmt = conn.createStatement();
-		      
-		      String sql = "INSERT INTO Bank " +
-		                   "VALUES ('"+first+"', '"+last+"', '"+accnt+"', '"+bal+"')";
-		      stmt.executeUpdate(sql);
-		      
-		      String get = ("SELECT * FROM Bank WHERE account=" + accnt +";");
-		      ResultSet rs = stmt.executeQuery(get);
+		      Statement st = conn.createStatement();
+		      String sql = ("SELECT * FROM REGISTRATION ORDER BY id DESC LIMIT 1;");
+		      ResultSet rs = st.executeQuery(sql);
 		      if(rs.next()) { 
+		       int id = rs.getInt("id"); 
 		       int str1 = rs.getInt("account");
-		       String dataName = rs.getString("first");
-		       System.out.println("Thanks " + dataName +"! You now have an account! Please remember this account number " + str1 +" or you will not be able to access your account!");
+		       System.out.println(str1);
 		      }
 		      
 		      
 
 		      conn.close();
+
 
 		   }catch(SQLException se){
 		      se.printStackTrace();
@@ -77,12 +74,9 @@ public Object setUser(String first, String last, int accnt, double bal){
 		         se.printStackTrace();
 		      }
 		   }
-		
 		   System.out.println("Goodbye!");
-
-		
-	Account returningUser = new Account();
-		return returningUser;
+		   
+	   
 		
 	}
 
@@ -92,6 +86,7 @@ public Object setUser(String first, String last, int accnt, double bal){
 
 
 
+**/
 
 
 
@@ -119,15 +114,14 @@ public Object setUser(String first, String last, int accnt, double bal){
 
 
 
+	   
 
-
-
-
+/**
 
 
 
 //Used to create new table, ignore unless needed
-/** package EllerBank;
+package testers;
 
 import java.sql.*;
 
@@ -151,13 +145,12 @@ public class BankDatabase {
       System.out.println("Creating table in given database...");
       stmt = conn.createStatement();
       
-      String sql = "CREATE TABLE REGISTRATION " +
-              "(id INTEGER not NULL, " +
-              " first VARCHAR(255), " + 
+      String sql = "CREATE TABLE Bank " +
+              " (first VARCHAR(255), " + 
               " last VARCHAR(255), " + 
               " account INTEGER, " + 
               " balance DOUBLE, " + 
-              " PRIMARY KEY ( id ));"; 
+              " PRIMARY KEY ( account ));"; 
 
       stmt.executeUpdate(sql);
       System.out.println("Created table in given database...");
