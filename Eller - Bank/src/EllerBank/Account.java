@@ -14,7 +14,7 @@ public class Account {
 		this.makeAccntNum();
 		bal=0.0;
 		
-	}
+	} 
 	
 	public Account(String f, String n){
 		numAccnt++;
