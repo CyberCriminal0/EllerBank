@@ -13,12 +13,16 @@ public class BankDatabase {
 
 	static final String USER = "jacksmysqluser";
 	static final String PASS = "LG6pM5pNybXH73yX";
+	private String output;
+	private double bal;
+	
+
 	public BankDatabase(){
 		
 	}
 	
 
-public Object setUser(String first, String last, int accnt, double bal){
+public String setUser(String first, String last, int accnt, double bal){
 		
 	
 	
@@ -30,31 +34,28 @@ public Object setUser(String first, String last, int accnt, double bal){
 		int accntNum;
 		double balance;
 		
-		
 		try{
-		      //STEP 2: Register JDBC driver
 		      Class.forName("com.mysql.jdbc.Driver");
-
-		      //STEP 3: Open a connection
 		      System.out.println("Adding user to bank database");
 		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		      System.out.println("Connection Success!");
-		      
-		      //STEP 4: Execute a query
 		      System.out.println("Adding user...");
 		      stmt = conn.createStatement();
-		      
 		      String sql = "INSERT INTO Bank " +
 		                   "VALUES ('"+first+"', '"+last+"', '"+accnt+"', '"+bal+"')";
 		      stmt.executeUpdate(sql);
-		      
 		      String get = ("SELECT * FROM Bank WHERE account=" + accnt +";");
 		      ResultSet rs = stmt.executeQuery(get);
 		      if(rs.next()) { 
 		       int str1 = rs.getInt("account");
 		       String dataName = rs.getString("first");
-		       System.out.println("Thanks " + dataName +"! You now have an account! Please remember this account number " + str1 +" or you will not be able to access your account!");
+		       String out = ("Thanks " + dataName +"! You now have an account! \nPlease remember this account number \n" + str1 +" \nor you will not be able to access your account!");
+		       this.output = out;
+
+
+		       
 		      }
+		      
 		      
 		      
 
@@ -62,7 +63,9 @@ public Object setUser(String first, String last, int accnt, double bal){
 
 		   }catch(SQLException se){
 		      se.printStackTrace();
+		      output = null;
 		   }catch(Exception e){
+			      output = null;
 		      e.printStackTrace();
 		   }finally{
 		      try{
@@ -79,12 +82,77 @@ public Object setUser(String first, String last, int accnt, double bal){
 		   }
 		
 		   System.out.println("Goodbye!");
+		   return output;
+		
 
-		
-	Account returningUser = new Account();
-		return returningUser;
-		
 	}
+public void getAccount(String accnt, String name){
+	
+	Connection conn = null;
+	Statement stmt = null;
+	
+	String firstN;
+	String lastN;
+	int accntNum;
+	double balance;
+	
+	try{
+	      Class.forName("com.mysql.jdbc.Driver");
+	      System.out.println("Adding user to bank database");
+	      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	      System.out.println("Connection Success!");
+	      System.out.println("Getting user...");
+	      stmt = conn.createStatement();
+	      String get = ("SELECT * FROM Bank WHERE account=" + accnt +";");
+	      ResultSet rs = stmt.executeQuery(get);
+	      if(rs.next()) { 
+	       int str1 = rs.getInt("account");
+	       String dataName = rs.getString("first");
+	       double bal1 = rs.getDouble("balance");
+		   System.out.println("Debug: " + str1 + " " + dataName + " " + bal1);
+		   this.output = str1+"";
+		   this.bal = bal1;
+	      }
+
+
+	      conn.close();
+
+	   }catch(SQLException se){
+	      se.printStackTrace();
+	      output = null;
+	   }catch(Exception e){
+		      output = null;
+	      e.printStackTrace();
+	   }finally{
+	      try{
+	         if(stmt!=null)
+	            conn.close();
+	      }catch(SQLException se){
+	      }
+	      try{
+	         if(conn!=null)
+	            conn.close();
+	      }catch(SQLException se){
+	         se.printStackTrace();
+	      }
+	   }
+	
+	   System.out.println("Goodbye!");
+	   
+	
+	
+	
+}
+public String getOutput() {
+	return output;
+}
+public double getBal() {
+	return bal;
+}
+
+
+
+
 
 }
 

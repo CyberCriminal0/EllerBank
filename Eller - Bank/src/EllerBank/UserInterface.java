@@ -58,15 +58,20 @@ public class UserInterface extends JFrame {
 		JButton btnCreateAccount = new JButton("Create New Account");
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				NewAccount newAccount = new NewAccount();
+				dispose();
+				
 			}
 		});
 		btnCreateAccount.setBounds(10, 99, 153, 50);
 		contentPane.add(btnCreateAccount);
 		
 		JButton btnLoginToExisting = new JButton("Login to Existing Account");
+		btnLoginToExisting.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnLoginToExisting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Test");
+				OldAccount oldAccount = new OldAccount();
 
 			}
 		});

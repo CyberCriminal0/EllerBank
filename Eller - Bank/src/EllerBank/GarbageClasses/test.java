@@ -1,3 +1,4 @@
+package EllerBank.GarbageClasses;
 /** package EllerBank;
 import java.util.Scanner;
 
