@@ -59,9 +59,7 @@ public class UserInterface extends JFrame {
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				NewAccount newAccount = new NewAccount();
-				dispose();
-				
+				NewAccount newAccount = new NewAccount();				
 			}
 		});
 		btnCreateAccount.setBounds(10, 99, 153, 50);
