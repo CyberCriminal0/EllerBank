@@ -60,7 +60,6 @@ public class UserInterface extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				NewAccount newAccount = new NewAccount();
-				dispose();
 				
 			}
 		});

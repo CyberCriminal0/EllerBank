@@ -38,6 +38,7 @@ public class NewAccount extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextArea textArea;
+	private JButton btnReturn;
 
 
 
@@ -49,7 +50,6 @@ public class NewAccount extends JFrame {
 		try {
 			newWindow();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		setVisible(true);
@@ -116,6 +116,18 @@ public class NewAccount extends JFrame {
 
 			}
 		});
+		
+		btnReturn = new JButton("Return");
+		btnReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		GridBagConstraints gbc_btnReturn = new GridBagConstraints();
+		gbc_btnReturn.insets = new Insets(0, 0, 0, 5);
+		gbc_btnReturn.gridx = 1;
+		gbc_btnReturn.gridy = 7;
+		contentPane.add(btnReturn, gbc_btnReturn);
 		GridBagConstraints gbc_btnSubmit = new GridBagConstraints();
 		gbc_btnSubmit.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSubmit.gridx = 4;
