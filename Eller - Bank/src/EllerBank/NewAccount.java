@@ -1,12 +1,16 @@
 package EllerBank;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.FlowLayout;
@@ -32,6 +36,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JProgressBar;
+
 public class NewAccount extends JFrame {
 
 	private JPanel contentPane;
@@ -39,7 +45,8 @@ public class NewAccount extends JFrame {
 	private JTextField textField_1;
 	private JTextArea textArea;
 	private JButton btnReturn;
-
+	private JProgressBar progressBar;
+	private int progress;
 
 
 	/**
@@ -57,6 +64,9 @@ public class NewAccount extends JFrame {
 
 
 	}
+	
+
+	
 		private void newWindow() throws IOException{
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,7 +96,8 @@ public class NewAccount extends JFrame {
 		gbc_textField_1.gridy = 1;
 		contentPane.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-		
+		progressBar = new JProgressBar();
+		progressBar.setStringPainted(true);
 		JLabel lblLastName = new JLabel("Last Name");
 		GridBagConstraints gbc_lblLastName = new GridBagConstraints();
 		gbc_lblLastName.insets = new Insets(0, 0, 5, 5);
@@ -102,19 +113,24 @@ public class NewAccount extends JFrame {
 		gbc_textField.gridy = 2;
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
+		 
 		
 		
+		progressBar.setBackground(Color.LIGHT_GRAY);
 		
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				String name = textField_1.getText();
 				String lname = textField.getText();
+				progress = 0;
 				Account userAccnt = new Account(name, lname);
+				progress = 25;
 				BankDatabase banker = new BankDatabase();
 				String user = banker.setUser(name, lname, userAccnt.getAccntNum(), userAccnt.getBal());
 				textArea.append(user);
-
+		        Toolkit.getDefaultToolkit().beep();     
 			}
 		});
 		
@@ -124,6 +140,13 @@ public class NewAccount extends JFrame {
 				dispose();
 			}
 		});
+		
+		
+		GridBagConstraints gbc_progressBar = new GridBagConstraints();
+		gbc_progressBar.insets = new Insets(0, 0, 5, 0);
+		gbc_progressBar.gridx = 5;
+		gbc_progressBar.gridy = 3;
+		contentPane.add(progressBar, gbc_progressBar);
 		GridBagConstraints gbc_btnReturn = new GridBagConstraints();
 		gbc_btnReturn.insets = new Insets(0, 0, 0, 5);
 		gbc_btnReturn.gridx = 1;
