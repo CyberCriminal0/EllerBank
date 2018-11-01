@@ -44,8 +44,8 @@ public String setUser(String first, String last, int accnt, double bal){
 		      stmt = conn.prepareStatement(sql);
 		      stmt.setString(1, first);
 		      stmt.setString(2, last);
-		      stmt.setString(3, accnt);
-		      stmt.setString(4, bal);
+		      stmt.setInt(3, accnt);
+		      stmt.setDouble(4, bal);
 		      stmt.executeUpdate(sql);
 		      String get = "SELECT * FROM Bank WHERE account=?;";
 		      stmt = conn.prepareStatement(get);
@@ -109,7 +109,7 @@ public void getAccount(String accnt, String name){
 	      System.out.println("Getting user...");
 	      String get = "SELECT * FROM Bank WHERE account=?;";
 	      stmt = conn.prepareStatement(get);
-	      stmt.setString(1, accnt);
+	      stmt.setInt(1, accnt);
 	      ResultSet rs = stmt.executeQuery();
 	      if(rs.next()) { 
 	       int str1 = rs.getInt("account");
