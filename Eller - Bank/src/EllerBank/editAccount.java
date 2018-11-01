@@ -40,12 +40,15 @@ public class editAccount {
 		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		      System.out.println("Connection Success!");
 		      System.out.println("Edit...");
-		      stmt = conn.createStatement();
-		      String get = ("SELECT * FROM Bank WHERE account=" + accnt +";");
-		      ResultSet rs = stmt.executeQuery(get);
+		      String get = "SELECT * FROM Bank WHERE account=?;";
+		      stmt = conn.prepareStatement(get);
+                      stmt.setInt(1, accnt);
+		      ResultSet rs = stmt.executeQuery();
 		      if(rs.next()) { 
-			   Statement updateEXP = conn.createStatement();
-			   String query = ("update Bank set balance = '"+ bal +"'  where `account` = '"+accnt+"'");
+			   String query = "update Bank set balance = ? where `account` = ?";
+			   Statement updateEXP = conn.prepareStatement();
+                           updateEXP.setDouble(1, bal);
+                           updateEXP.setInt(2, accnt);
 			   int updateEXP_done = updateEXP.executeUpdate(query);
 		       int str1 = rs.getInt("account");
 		       String dataName = rs.getString("first");
