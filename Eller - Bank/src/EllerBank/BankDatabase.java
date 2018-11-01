@@ -40,12 +40,17 @@ public String setUser(String first, String last, int accnt, double bal){
 		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		      System.out.println("Connection Success!");
 		      System.out.println("Adding user...");
-		      stmt = conn.createStatement();
-		      String sql = "INSERT INTO Bank " +
-		                   "VALUES ('"+first+"', '"+last+"', '"+accnt+"', '"+bal+"')";
+		      String sql = "INSERT INTO Bank VALUES (?, ?, ?, ?)";
+		      stmt = conn.prepareStatement(sql);
+		      stmt.setString(1, first);
+		      stmt.setString(2, last);
+		      stmt.setString(3, accnt);
+		      stmt.setString(4, bal);
 		      stmt.executeUpdate(sql);
-		      String get = ("SELECT * FROM Bank WHERE account=" + accnt +";");
-		      ResultSet rs = stmt.executeQuery(get);
+		      String get = "SELECT * FROM Bank WHERE account=?;";
+		      stmt = conn.prepareStatement(get);
+		      stmt.setString(1, accnt);
+		      ResultSet rs = stmt.executeQuery();
 		      if(rs.next()) { 
 		       int str1 = rs.getInt("account");
 		       String dataName = rs.getString("first");
@@ -102,9 +107,10 @@ public void getAccount(String accnt, String name){
 	      conn = DriverManager.getConnection(DB_URL, USER, PASS);
 	      System.out.println("Connection Success!");
 	      System.out.println("Getting user...");
-	      stmt = conn.createStatement();
-	      String get = ("SELECT * FROM Bank WHERE account=" + accnt +";");
-	      ResultSet rs = stmt.executeQuery(get);
+	      String get = "SELECT * FROM Bank WHERE account=?;";
+	      stmt = conn.prepareStatement(get);
+	      stmt.setString(1, accnt);
+	      ResultSet rs = stmt.executeQuery();
 	      if(rs.next()) { 
 	       int str1 = rs.getInt("account");
 	       String dataName = rs.getString("first");
